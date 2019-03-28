@@ -35,8 +35,6 @@ from util import html
 from PIL import Image
 import numpy as np
 import torchvision
-from matplotlib import pyplot as plt
-
 
 if __name__ == '__main__':
     opt = TestOptions().parse()  # get test options
@@ -66,13 +64,10 @@ if __name__ == '__main__':
         model.test()           # run inference
         visuals = model.get_current_visuals()  # get image results
         img_path = model.get_image_paths()     # get image paths
-        print(visuals)
         v = visuals['fake_B']
-        print("Hey")
         data = v.view(-1, *v.size()[2:])
-        # print(data.numpy())
         a = torchvision.transforms.ToPILImage()(data)
-        a.save("mysave.png")
+        a.save("save.png")
         a.show()
         print(a)
 
