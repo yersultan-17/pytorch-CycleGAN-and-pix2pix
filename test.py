@@ -32,6 +32,10 @@ from data import create_dataset
 from models import create_model
 from util.visualizer import save_images
 from util import html
+from PIL import Image
+import numpy as np
+import torchvision
+from matplotlib import pyplot as plt
 
 
 if __name__ == '__main__':
@@ -52,7 +56,6 @@ if __name__ == '__main__':
     # For [pix2pix]: we use batchnorm and dropout in the original pix2pix. You can experiment it with and without eval() mode.
     # For [CycleGAN]: It should not affect CycleGAN as CycleGAN uses instancenorm without dropout.
     
-    imagesResult = []
     
     if opt.eval:
         model.eval()
@@ -63,5 +66,14 @@ if __name__ == '__main__':
         model.test()           # run inference
         visuals = model.get_current_visuals()  # get image results
         img_path = model.get_image_paths()     # get image paths
-        imagesResult.append(img_path)
-        print(img_path)
+        print(visuals)
+        v = visuals['fake_B']
+        print("Hey")
+        data = v.view(-1, *v.size()[2:])
+        # print(data.numpy())
+        a = torchvision.transforms.ToPILImage()(data)
+        a.save("mysave.png")
+        a.show()
+        print(a)
+
+        
