@@ -65,5 +65,3 @@ if __name__ == '__main__':
         img_path = model.get_image_paths()     # get image paths
         imagesResult.append(img_path)
         print(img_path)
-        
-    return imagesResult
