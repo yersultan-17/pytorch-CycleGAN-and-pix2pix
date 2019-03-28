@@ -33,7 +33,6 @@ from models import create_model
 from util.visualizer import save_images
 from util import html
 from PIL import Image
-import numpy as np
 import torchvision
 
 if __name__ == '__main__':
@@ -54,7 +53,8 @@ if __name__ == '__main__':
     # For [pix2pix]: we use batchnorm and dropout in the original pix2pix. You can experiment it with and without eval() mode.
     # For [CycleGAN]: It should not affect CycleGAN as CycleGAN uses instancenorm without dropout.
     
-    
+    print("One more check line")
+
     if opt.eval:
         model.eval()
     for i, data in enumerate(dataset):
@@ -67,8 +67,9 @@ if __name__ == '__main__':
         v = visuals['fake_B']
         data = v.view(-1, *v.size()[2:])
         a = torchvision.transforms.ToPILImage()(data)
-        a.save("save.png")
-        a.show()
+        print("Check line")
+        #a.save("save.png")
+        # a.show()
         print(a)
 
         
