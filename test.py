@@ -37,18 +37,19 @@ import torchvision
 
 if __name__ == '__main__':
     opt = TestOptions().parse()  # get test options
-    print("Check line 1")
+    #print("Check line 1")
     # hard-code some parameters for test
     opt.num_threads = 0   # test code only supports num_threads = 1
     opt.batch_size = 1    # test code only supports batch_size = 1
     opt.serial_batches = True  # disable data shuffling; comment this line if results on randomly chosen images are needed.
     opt.no_flip = True    # no flip; comment this line if results on flipped images are needed.
     opt.display_id = -1   # no visdom display; the test code saves the results to a HTML file.
-    print("Check line 2")
+    #print("Check line 2")
     dataset = create_dataset(opt)  # create a dataset given opt.dataset_mode and other options
-    print("Check line 3")
+    #print("Check line 3")
+    print(dataset)
     model = create_model(opt)      # create a model given opt.model and other options
-    print("Check line 4")
+    #print("Check line 4")
     model.setup(opt)               # regular setup: load and print networks; create schedulers
     # create a website
     # web_dir = os.path.join(opt.results_dir, opt.name, '%s_%s' % (opt.phase, opt.epoch))  # define the website directory
@@ -57,7 +58,7 @@ if __name__ == '__main__':
     # For [pix2pix]: we use batchnorm and dropout in the original pix2pix. You can experiment it with and without eval() mode.
     # For [CycleGAN]: It should not affect CycleGAN as CycleGAN uses instancenorm without dropout.
     
-    print("One more check line")
+    #print("One more check line")
 
     if opt.eval:
         model.eval()
@@ -72,8 +73,8 @@ if __name__ == '__main__':
         data = v.view(-1, *v.size()[2:])
         a = torchvision.transforms.ToPILImage()(data)
         print("Check line")
-        #a.save("save.png")
-        # a.show()
+        a.save("save.png")
+        a.show()
         print(a)
 
         
